@@ -1,0 +1,22 @@
+{
+  "name": "nextjsblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gray-matter": "^4.0.2",
+    "next": "^9.4.4",
+    "raw-loader": "^4.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1"
+  }
+}

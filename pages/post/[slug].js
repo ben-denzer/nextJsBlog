@@ -1,0 +1,27 @@
+import React from 'react';
+import matter from 'gray-matter';
+import ReactMarkdown from 'react-markdown';
+
+const PostTemplate = (props) => {
+  const { data, content } = props;
+  return (
+    <>
+      <header>
+        <h1>{data.title}</h1>
+      </header>
+
+      <main>
+        <ReactMarkdown source={content} />
+      </main>
+    </>
+  );
+};
+
+PostTemplate.getInitialProps = async (context) => {
+  const { slug } = context.query;
+  const content = await import(`../../content/${slug}.md`);
+  const data = matter(content.default);
+  return { ...data };
+};
+
+export default PostTemplate;
