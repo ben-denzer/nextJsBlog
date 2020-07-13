@@ -1,3 +1,4 @@
+import { createContext } from 'react';
 import { AppProps } from 'next/app';
 import styled, { ThemeProvider } from 'styled-components';
 import Navigation from '../components/NavBar';
@@ -13,8 +14,15 @@ const MainContent = styled.main`
   color: ${(p) => p.theme.textColor};
 `;
 
+const defaultTheme = Themes.DARK;
+
+interface IAppContext {
+  theme: Themes;
+}
+const AppContext = createContext<IAppContext>({ theme: defaultTheme });
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const [currentTheme, _setCurrentTheme] = useState<Themes>(Themes.DARK);
+  const [currentTheme, _setCurrentTheme] = useState<Themes>(defaultTheme);
 
   const setCurrentTheme = (nextTheme: Themes) => {
     document.body.style.backgroundColor = theme[nextTheme].contentBackground;
@@ -22,13 +30,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   };
 
   return (
-    <ThemeProvider theme={theme[currentTheme]}>
-      <Navigation relatedPosts={[]} setCurrentTheme={setCurrentTheme} currentTheme={currentTheme} />
-      <MainContent>
-        <Component {...pageProps} />
-      </MainContent>
-    </ThemeProvider>
+    <AppContext.Provider value={{ theme: currentTheme }}>
+      <ThemeProvider theme={theme[currentTheme]}>
+        <Navigation relatedPosts={[]} setCurrentTheme={setCurrentTheme} currentTheme={currentTheme} />
+        <MainContent>
+          <Component {...pageProps} />
+        </MainContent>
+      </ThemeProvider>
+    </AppContext.Provider>
   );
 };
 
+export { AppContext };
 export default MyApp;

@@ -1,6 +1,7 @@
 import React from 'react';
 import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
+import CodeBlock from '../../components/CodeBlock';
 
 const PostTemplate = (props) => {
   const { data, content } = props;
@@ -12,7 +13,7 @@ const PostTemplate = (props) => {
 
       <main>
         {/* STYLES FOR THIS SECTION ARE IN THE SASS FOLDER */}
-        <ReactMarkdown source={content} />
+        <ReactMarkdown source={content} renderers={{ code: CodeBlock }} />
       </main>
     </>
   );
