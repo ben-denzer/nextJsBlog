@@ -11,6 +11,7 @@ const PostTemplate = (props) => {
       </header>
 
       <main>
+        {/* STYLES FOR THIS SECTION ARE IN THE SASS FOLDER */}
         <ReactMarkdown source={content} />
       </main>
     </>
