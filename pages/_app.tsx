@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 import { AppProps } from 'next/app';
 import styled, { ThemeProvider } from 'styled-components';
 import Navigation from '../components/NavBar';
@@ -23,6 +23,10 @@ const AppContext = createContext<IAppContext>({ theme: defaultTheme });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [currentTheme, _setCurrentTheme] = useState<Themes>(defaultTheme);
+
+  useEffect(() => {
+    setCurrentTheme(defaultTheme);
+  }, []);
 
   const setCurrentTheme = (nextTheme: Themes) => {
     document.body.style.backgroundColor = theme[nextTheme].contentBackground;

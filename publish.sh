@@ -3,15 +3,15 @@
 npm=`which npm`
 pm2=`which pm2`
 git=`which git`
-parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+APP_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 echo "### STARTING PUBLISH.SH"
 
-echo '### ENTER APP DIRECTORY - cd "$parent_path"'
-cd "$parent_path"
+echo '### ENTER APP DIRECTORY - cd "$APP_DIR"'
+cd "$APP_DIR"
 
 echo "### PULL LATEST CHANGES - git pull upstream master"
-$git pull upstream master
+$git --git-dir=${APP_DIR}/.git pull upstream master
 
 echo "### INSTALL DEPENDENCIES - npm install"
 $npm install
