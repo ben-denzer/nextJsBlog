@@ -1,6 +1,6 @@
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coy, okaidia } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { base16AteliersulphurpoolLight, okaidia } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { AppContext } from '../../pages/_app';
 import { Themes } from '../../types/general';
 import styled from 'styled-components';
@@ -10,10 +10,7 @@ interface Props {
   style?: any;
 }
 
-const WithBorder = styled.div`
-  border: 1px solid;
-  border-color: ${(p) => p.theme.textColor};
-`;
+const WithBorder = styled.div``;
 
 const CodeBlock = (props: Props) => {
   const { value, style } = props;
@@ -30,7 +27,7 @@ const CodeBlockWrapper = (props: Props) => {
   return (
     <AppContext.Consumer>
       {(value) => {
-        const codeStyle = value.theme === Themes.LIGHT ? coy : okaidia;
+        const codeStyle = value.theme === Themes.LIGHT ? base16AteliersulphurpoolLight : okaidia;
         return <CodeBlock {...props} style={codeStyle} />;
       }}
     </AppContext.Consumer>
