@@ -1,14 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Themes } from '../../types/general';
-import {
-  sideMargin,
-  navHeight,
-  navHeightMobile,
-  colorTransition,
-  onMobile,
-  Container,
-} from '../../config/globalStyles';
+import { sideMargin, navHeight, navHeightMobile, colorTransition, onMobile } from '../../config/globalStyles';
+import Container from '../Container';
 
 const headerHeightCss = `
   min-height: ${navHeight}px;

@@ -1,8 +1,11 @@
 import React from 'react';
-import { Container } from '../config/globalStyles';
+import Container from '../components/Container';
+import styled from 'styled-components';
+
+const HomepageWrapper = styled.div``;
 
 const Index = () => {
-  return <Container>Hi From Homepage, updated7</Container>;
+  return <HomepageWrapper>Hi From Homepage, updated7</HomepageWrapper>;
 };
 
 export default Index;

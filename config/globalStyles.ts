@@ -23,22 +23,3 @@ export const smallLaptopBreakpoint = 1250;
 export const onMobile = `@media (max-width: ${mobileBreakpoint}px)`;
 export const onSmallLaptop = `@media (max-width: ${smallLaptopBreakpoint}px)`;
 export const colorTransition = 'transition: none'; // transition: background-color 0.5s, color 0.5s
-
-// COMPONENTS
-export const Container = styled.div`
-  display: flex;
-  width: 60%;
-  margin: 0 auto;
-  min-width: 700px;
-
-  ${onSmallLaptop} {
-    background: yellow;
-    width: 80%;
-    min-width: 500px;
-  }
-
-  ${onMobile} {
-    width: 95%;
-    min-width: unset;
-  }
-`;

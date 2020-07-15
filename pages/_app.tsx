@@ -8,6 +8,7 @@ import { Themes } from '../types/general';
 import './main.css';
 import { sideMargin, colorTransition } from '../config/globalStyles';
 import { hasLocalStorage } from '../utils/general';
+import Container from '../components/Container';
 
 const localStorageThemeName = 'blogColorTheme';
 
@@ -59,7 +60,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <AppWrapper>
           <Navigation relatedPosts={[]} setCurrentTheme={setCurrentTheme} currentTheme={currentTheme} />
           <MainContent>
-            <Component {...pageProps} />
+            <Container>
+              <Component {...pageProps} />
+            </Container>
           </MainContent>
         </AppWrapper>
       </ThemeProvider>
