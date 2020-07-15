@@ -6,12 +6,22 @@ import theme from '../config/theme';
 import { useState } from 'react';
 import { Themes } from '../types/general';
 import './main.css';
-import { sideMargin } from '../config/globalStyles';
+import { sideMargin, colorTransition } from '../config/globalStyles';
+import { hasLocalStorage } from '../utils/general';
+
+const localStorageThemeName = 'blogColorTheme';
+
+const AppWrapper = styled.div`
+  min-height: 100vh;
+  background-color: ${(p) => p.theme.contentBackground};
+  ${colorTransition};
+`;
 
 const MainContent = styled.main`
   padding: 10px ${sideMargin}px;
-  background-color: ${(p) => p.theme.contentBackground};
   color: ${(p) => p.theme.textColor};
+  display: flex;
+  flex-grow: 1;
 `;
 
 const defaultTheme = Themes.DARK;
@@ -25,21 +35,33 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [currentTheme, _setCurrentTheme] = useState<Themes>(defaultTheme);
 
   useEffect(() => {
-    setCurrentTheme(defaultTheme);
+    let themeName = defaultTheme;
+    if (hasLocalStorage()) {
+      const inStorage = window.localStorage.getItem(localStorageThemeName);
+      if (inStorage === Themes.LIGHT || inStorage === Themes.DARK) {
+        themeName = inStorage;
+      }
+    }
+
+    setCurrentTheme(themeName);
   }, []);
 
   const setCurrentTheme = (nextTheme: Themes) => {
-    document.body.style.backgroundColor = theme[nextTheme].contentBackground;
     _setCurrentTheme(nextTheme);
+    // if (hasLocalStorage()) {
+    //   window.localStorage.setItem(localStorageThemeName, nextTheme);
+    // }
   };
 
   return (
     <AppContext.Provider value={{ theme: currentTheme }}>
       <ThemeProvider theme={theme[currentTheme]}>
-        <Navigation relatedPosts={[]} setCurrentTheme={setCurrentTheme} currentTheme={currentTheme} />
-        <MainContent>
-          <Component {...pageProps} />
-        </MainContent>
+        <AppWrapper>
+          <Navigation relatedPosts={[]} setCurrentTheme={setCurrentTheme} currentTheme={currentTheme} />
+          <MainContent>
+            <Component {...pageProps} />
+          </MainContent>
+        </AppWrapper>
       </ThemeProvider>
     </AppContext.Provider>
   );

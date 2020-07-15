@@ -1,7 +1,8 @@
 import React from 'react';
+import { Container } from '../config/globalStyles';
 
 const Index = () => {
-  return <div>Hi From Homepage, updated7</div>;
+  return <Container>Hi From Homepage, updated7</Container>;
 };
 
 export default Index;

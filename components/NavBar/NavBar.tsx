@@ -1,21 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Themes } from '../../types/general';
-import { sideMargin } from '../../config/globalStyles';
+import {
+  sideMargin,
+  navHeight,
+  navHeightMobile,
+  colorTransition,
+  onMobile,
+  Container,
+} from '../../config/globalStyles';
+
+const headerHeightCss = `
+  min-height: ${navHeight}px;
+  ${onMobile} {
+    min-height: ${navHeightMobile}px;
+  }
+`;
+
+const NavBackground = styled.header`
+  padding: 10px ${sideMargin}px;
+  background-color: ${(p) => p.theme.navBackground};
+  align-items: center;
+  ${colorTransition};
+  ${headerHeightCss}
+`;
 
 const NavWrapper = styled.header`
-  ${(p) => `
-    padding: 10px ${sideMargin}px;
-    background-color: ${p.theme.navBackground};
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    color: ${p.theme.textColor};
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 1;
+  align-items: center;
+  color: ${(p) => p.theme.textColor};
+  ${headerHeightCss}
 
-    h1, h2 {
-      margin: 0 10px;
-    }
-  `};
+  h1,
+  h2 {
+    margin: 0 10px 0 0;
+  }
 `;
 
 interface Props {
@@ -31,11 +52,15 @@ const Nav = (props: Props) => {
   };
 
   return (
-    <NavWrapper>
-      <h1>From Construction To Coding</h1>
-      <h2>Ben Denzer</h2>
-      <button onClick={updateTheme}>Hi {props.currentTheme}</button>
-    </NavWrapper>
+    <NavBackground>
+      <Container>
+        <NavWrapper id="navWrapper">
+          <h1>From Construction To Coding</h1>
+          <h2>Ben Denzer</h2>
+          <button onClick={updateTheme}>Hi {props.currentTheme}</button>
+        </NavWrapper>
+      </Container>
+    </NavBackground>
   );
 };
 
